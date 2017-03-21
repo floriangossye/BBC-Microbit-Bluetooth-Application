@@ -52,34 +52,28 @@
             Latitude = position.coords.latitude;
             Longitude = position.coords.longitude;
             getMap(Latitude, Longitude);
-
         }
 
         // Get map by using coordinates
 
         function getMap(latitude, longitude) {
-            //var directionDisplay;
-            //var directionsService = new google.maps.DirectionsService();
-            //directionDisplay = new google.DirectionsRenderer();
-            var mapOptions = {
+            //instantiate directionservice
 
+            var mapOptions = {
                 center: new google.maps.LatLng(0, 0),
                 zoom: 9,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
 
             };
-            map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+            map = new google.maps.Map(document.getElementById("map"), mapOptions);
             var latLong = new google.maps.LatLng(latitude, longitude);
-            var marker = new google.maps.Marker({
+            var markerA = new google.maps.Marker({
                 position: latLong
             });
-            
-            marker.setMap(map);
+            markerA.setMap(map);
             map.setZoom(20);
-            map.setCenter(marker.getPosition());
-
-
+            map.setCenter(markerA.getPosition());
         }
         // Success callback for watching your changing position
 
@@ -164,10 +158,11 @@
         <button onclick="getMapLocation()" class="charcoal">Get Map</button>
     </p>
     <p>
-        <button onclick="setMarker()" class="charcoal">Set Marker</button>
+        <button onclick="" class="charcoal">Set Marker</button>
     </p>
 
     <div id="map"></div>
+    <div id="warnings-panel"></div>
 
 
 
