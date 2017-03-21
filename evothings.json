@@ -1,0 +1,108 @@
+{
+  "name": "btappwithmicrobit",
+  "version": "1.0.0",
+  "title": "BT-APP",
+  "description": "App that writes text on the BBC Micro:bit using the LED matrix and BLE.",
+  "tags": [
+    {
+      "label": "microbit",
+      "type": "vendor"
+    },
+    {
+      "label": "mbed",
+      "type": "platform"
+    },
+    {
+      "label": "ble",
+      "type": "comm"
+    }
+  ],
+  "libraries": [],
+  "plugins": [
+    {
+      "name": "cordova-plugin-battery-status"
+    },
+    {
+      "name": "cordova-plugin-ble",
+      "version": "2.0.0"
+    },
+    {
+      "name": "cordova-plugin-bluetooth-serial"
+    },
+    {
+      "name": "cordova-plugin-camera"
+    },
+    {
+      "name": "cordova-plugin-chrome-apps-sockets-tcp"
+    },
+    {
+      "name": "cordova-plugin-chrome-apps-sockets-tcpserver"
+    },
+    {
+      "name": "cordova-plugin-chrome-apps-sockets-udp"
+    },
+    {
+      "name": "cordova-plugin-chrome-apps-system-network"
+    },
+    {
+      "name": "cordova-plugin-console"
+    },
+    {
+      "name": "cordova-plugin-device"
+    },
+    {
+      "name": "cordova-plugin-device-motion"
+    },
+    {
+      "name": "cordova-plugin-device-orientation"
+    },
+    {
+      "name": "cordova-plugin-dialogs"
+    },
+    {
+      "name": "cordova-plugin-estimote"
+    },
+    {
+      "name": "cordova-plugin-geolocation"
+    },
+    {
+      "name": "cordova-plugin-globalization"
+    },
+    {
+      "name": "cordova-plugin-http",
+      "version": "v0.2.2"
+    },
+    {
+      "name": "cordova-plugin-ibeacon",
+      "version": "3.4.3"
+    },
+    {
+      "name": "cordova-plugin-inappbrowser"
+    },
+    {
+      "name": "cordova-plugin-network-information"
+    },
+    {
+      "name": "cordova-plugin-statusbar"
+    },
+    {
+      "name": "cordova-plugin-vibration"
+    },
+    {
+      "name": "cordova-plugin-whitelist"
+    },
+    {
+      "name": "de.appplant.cordova.plugin.local-notification",
+      "version": "0.8.4"
+    }
+  ],
+  "index-file": "index.html",
+  "uuid": "5cd839cb-75dd-48e6-bdad-01fc446f3d28",
+  "icon": "app-icon.png",
+  "doc-url": "http://evothings.com/2.2/doc/examples/microbit-led.html",
+  "long-description": "BT-App for bbc microbit",
+  "cordova-id": "com.evothings.examples.microbitled",
+  "author-name": "Florian Gossye",
+  "author-email": "florian.gossye@student.ehb.be",
+  "author-url": "https://evothings.com"
+}
