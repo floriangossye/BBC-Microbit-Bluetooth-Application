@@ -11,8 +11,9 @@ var directionsService = new google.maps.DirectionsService();
 function getMapLocation() {
     navigator.geolocation.getCurrentPosition(onMapSuccess, onMapError, {
         enableHighAccuracy: true //Highest Gps accuracy
-        console.log("whut");
+        
     });
+    console.log("whut");
 }
 // Success callback for get geo coordinates
 var onMapSuccess = function (position) {
@@ -25,7 +26,6 @@ var onMapSuccess = function (position) {
 function getMap(latitude, longitude) {
     latLong = new google.maps.LatLng(latitude, longitude);
     latLong2 = new google.maps.LatLng(latitude + 0.002, longitude);
-
     mapOptions = {
         center: new google.maps.LatLng(latitude, longitude),
         zoom: 15,
@@ -47,6 +47,7 @@ function getMap(latitude, longitude) {
 
     markerA.setMap(map);
     markerB.setMap(map);
+   
     request = {
         origin: latlong,
         destination: latlong2,
@@ -61,18 +62,10 @@ function getMap(latitude, longitude) {
 
         }
     });
+    
 }
-//Setting 2 markers
-
-
 //Animation function
-function toggleBounce() {
-    if (marker.getAnimation() !== null) {
-        marker.setAnimation(null);
-    } else {
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-    }
-}
+
 
 // Success callback for watching your changing position
 var onMapWatchSuccess = function (position) {
