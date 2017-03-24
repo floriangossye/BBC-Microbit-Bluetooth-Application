@@ -11,9 +11,10 @@ var directionsService = new google.maps.DirectionsService();
 function getMapLocation() {
     navigator.geolocation.getCurrentPosition(onMapSuccess, onMapError, {
         enableHighAccuracy: true //Highest Gps accuracy
-        
+
     });
-    console.log("whut");
+    console.log("Initialising map");
+    
 }
 // Success callback for get geo coordinates
 var onMapSuccess = function (position) {
@@ -25,7 +26,8 @@ var onMapSuccess = function (position) {
 // setting map
 function getMap(latitude, longitude) {
     latLong = new google.maps.LatLng(latitude, longitude);
-    latLong2 = new google.maps.LatLng(latitude + 0.002, longitude);
+    latLong2 = new google.maps.LatLng(latitude + 0.003, longitude);
+
     mapOptions = {
         center: new google.maps.LatLng(latitude, longitude),
         zoom: 15,
@@ -33,7 +35,9 @@ function getMap(latitude, longitude) {
     };
     //Map Object & Directions Object
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    console.log("Map is set");
     //Requesting direction Service
+    /*
     var markerA = new google.maps.Marker({
         draggable: true,
         animation: google.maps.Animation.DROP,
@@ -44,27 +48,26 @@ function getMap(latitude, longitude) {
         animation: google.maps.Animation.DROP,
         position: latLong2
     });
-
     markerA.setMap(map);
     markerB.setMap(map);
-   
-    request = {
-        origin: latlong,
-        destination: latlong2,
+*/
+    //Creating & displaying directions
+    console.log("requesting directions");
+    var request = {
+        origin: latLong,
+        destination: latLong2,
         travelMode: 'WALKING'
     };
 
-    directionsDisplay = new google.maps.DirectionsRenderer();
-    directionsDisplay.setMap(map);
     directionsService.route(request, function (result, status) {
         if (status == 'OK') {
             directionsDisplay.setDirections(result);
-
         }
     });
-    
+    directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsDisplay.setMap(map);
+    console.log("directions set");
 }
-//Animation function
 
 
 // Success callback for watching your changing position
@@ -79,7 +82,7 @@ var onMapWatchSuccess = function (position) {
         Longitude = updatedLongitude;
 
         getMap(updatedLatitude, updatedLongitude);
-        setMarker(updatedLatitude, updatedLongitude);
+
     }
 }
 // Error callback
