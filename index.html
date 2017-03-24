@@ -2,18 +2,14 @@
 <html>
 
 <head>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no
 		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-
     <title>Microbit LED</title>
-
     <style>
         @import 'ui/css/evothings-app.css';
 
     </style>
-
     <script>
         // Redirect console.log to Evothings Workbench.
         if (window.hyper && window.hyper.log) {
@@ -21,7 +17,6 @@
         }
 
     </script>
-
     <script src="cordova.js"></script>
     <script src="libs/evothings/evothings.js"></script>
     <script src="libs/evothings/ui/ui.js"></script>
@@ -30,12 +25,10 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB11ORtcd_UAUPfwS7d_3qPj6GLBj2_1EY"></script>
     <script src="app.js"></script>
     <script src="google_maps_api_script.js"></script>
-
 </head>
 
 <body ontouchstart="">
     <!-- ontouchstart="" enables low-delay CSS transitions. -->
-
     <header>
         <button class="back" onclick="history.back()">
             <img src="ui/images/arrow-left.svg" />
@@ -43,24 +36,16 @@
 
         <img class="logotype" src="ui/images/logo.png" alt="Evothings" />
     </header>
-
     <h1>BT-LED APP</h1>
     <button onclick="app.onStartButton()" class="green">
         Connect
     </button>
-
     <button onclick="app.onStopButton()" class="charcoal">
         Disconnect
     </button>
-
     <p>
         <strong>Status:</strong> <span id="Status">Press Connect to find the nearest Microbit</span>
     </p>
-
-    <!--<p>
-		<button onclick="app.printPhoneModel()" class="charcoal">Print phone model</button>
-	</p>
-	-->
     <p>
         <button onclick="app.printLeft()" class="charcoal">Go Left</button>
     </p>
@@ -70,7 +55,6 @@
     <p>
         <button onclick="app.printUp()" class="charcoal">Print Up</button>
     </p>
-
     <p>
         <button onclick="app.printLocation()" class="charcoal">Print Location</button>
     </p>
@@ -86,9 +70,6 @@
     </p>
     <div id="map"></div>
     <div id="warnings-panel"></div>
-
-
-
 </body>
 
 </html>

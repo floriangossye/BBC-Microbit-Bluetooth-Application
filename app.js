@@ -1,3 +1,4 @@
+/*Created by Florian Gossye for FabLab Factory*/
 /**
  * Object that holds application data and functions.
  */

@@ -1,3 +1,4 @@
+/*Created by Florian Gossye for FabLab Factory*/
 var Latitude = undefined;
 var Longitude = undefined;
 var mapOptions;
@@ -11,10 +12,8 @@ var directionsService = new google.maps.DirectionsService();
 function getMapLocation() {
     navigator.geolocation.getCurrentPosition(onMapSuccess, onMapError, {
         enableHighAccuracy: true //Highest Gps accuracy
-
     });
     console.log("Initialising map");
-    
 }
 // Success callback for get geo coordinates
 var onMapSuccess = function (position) {
@@ -23,7 +22,7 @@ var onMapSuccess = function (position) {
     getMap(Latitude, Longitude);
 
 }
-// setting map
+// Setting map
 function getMap(latitude, longitude) {
     latLong = new google.maps.LatLng(latitude, longitude);
     latLong2 = new google.maps.LatLng(latitude + 0.003, longitude);
@@ -68,8 +67,6 @@ function getMap(latitude, longitude) {
     directionsDisplay.setMap(map);
     console.log("directions set");
 }
-
-
 // Success callback for watching your changing position
 var onMapWatchSuccess = function (position) {
 
@@ -91,7 +88,6 @@ function onMapError(error) {
         'message: ' + error.message + '\n');
 }
 // Watch your changing position
-
 function watchMapPosition() {
     return navigator.geolocation.watchPosition(onMapWatchSuccess, onMapError, {
         enableHighAccuracy: true
