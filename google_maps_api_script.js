@@ -8,6 +8,10 @@ var latlong;
 var latlong2;
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
+var geocoder = new google.maps.Geocoder();
+var address = ("50.950459,4.055541");
+var destination;
+
 // Get geo coordinates & call location
 function getMapLocation() {
     navigator.geolocation.getCurrentPosition(onMapSuccess, onMapError, {
@@ -22,10 +26,10 @@ var onMapSuccess = function (position) {
     getMap(Latitude, Longitude);
 
 }
-// Setting map
+// Setting map,geocode directions & display directions
 function getMap(latitude, longitude) {
     latLong = new google.maps.LatLng(latitude, longitude);
-    latLong2 = new google.maps.LatLng(latitude + 0.003, longitude);
+    //latLong2 = new google.maps.LatLng(latitude + 0.003, longitude);
 
     mapOptions = {
         center: new google.maps.LatLng(latitude, longitude),
@@ -35,6 +39,7 @@ function getMap(latitude, longitude) {
     //Map Object & Directions Object
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
     console.log("Map is set");
+    // document.getElementById('submit').addEventListener('click',);
     //Requesting direction Service
     /*
     var markerA = new google.maps.Marker({
@@ -50,11 +55,24 @@ function getMap(latitude, longitude) {
     markerA.setMap(map);
     markerB.setMap(map);
 */
+    //Getting geocoded coords
+    console.log("Initialise geocoding")
+    geocoder.geocode({
+        'address': address
+    }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            var latGeo = results[0].geometry.location.lat();
+            var longGeo = results[0].geometry.location.lng();
+            destination = new google.maps.LatLng(latGeo, longGeo);
+            console.log(destination);
+        }
+    });
+    console.log("geocode finished")
     //Creating & displaying directions
     console.log("requesting directions");
     var request = {
         origin: latLong,
-        destination: latLong2,
+        destination: destination,
         travelMode: 'WALKING'
     };
 
