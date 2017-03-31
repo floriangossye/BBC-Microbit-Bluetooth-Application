@@ -9,7 +9,7 @@ var latlong2;
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 var geocoder = new google.maps.Geocoder();
-var address = ("50.950459,4.055541");
+var address = "50.950459,4.055541";
 var destination;
 
 // Get geo coordinates & call location
