@@ -9,7 +9,7 @@ var latlong2;
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 var geocoder = new google.maps.Geocoder();
-var address = "50.950459,4.055541";
+
 var destination;
 
 // Get geo coordinates & call location
@@ -19,16 +19,17 @@ function getMapLocation() {
     });
     console.log("Initialising map");
 }
+
 // Success callback for get geo coordinates
 var onMapSuccess = function (position) {
     Latitude = position.coords.latitude;
     Longitude = position.coords.longitude;
     getMap(Latitude, Longitude);
-
 }
 // Setting map,geocode directions & display directions
 function getMap(latitude, longitude) {
     latLong = new google.maps.LatLng(latitude, longitude);
+    var address = document.getElementById("address").value;
     //latLong2 = new google.maps.LatLng(latitude + 0.003, longitude);
 
     mapOptions = {
@@ -67,24 +68,29 @@ function getMap(latitude, longitude) {
             console.log(destination);
         }
     });
+
     console.log("geocode finished")
     //Creating & displaying directions
     console.log("requesting directions");
     var request = {
         origin: latLong,
         destination: destination,
-        travelMode: 'WALKING'
+        travelMode: 'BICYCLING'
     };
 
     directionsService.route(request, function (result, status) {
         if (status == 'OK') {
             directionsDisplay.setDirections(result);
+            console.log(result);
         }
     });
     directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setMap(map);
+    directionsDisplay.setPanel(document.getElementById('right-panel'));
+
     console.log("directions set");
 }
+
 // Success callback for watching your changing position
 var onMapWatchSuccess = function (position) {
 
