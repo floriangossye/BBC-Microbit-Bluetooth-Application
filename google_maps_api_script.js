@@ -35,7 +35,7 @@ function getMap(latitude, longitude) {
     mapOptions = {
         center: new google.maps.LatLng(latitude, longitude),
         zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.TERRAIN
     };
     //Map Object & Directions Object
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
