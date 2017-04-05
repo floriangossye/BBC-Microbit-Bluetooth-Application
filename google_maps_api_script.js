@@ -9,9 +9,7 @@ var latlong2;
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 var geocoder = new google.maps.Geocoder();
-
 var destination;
-
 // Get geo coordinates & call location
 function getMapLocation() {
     navigator.geolocation.getCurrentPosition(onMapSuccess, onMapError, {
@@ -25,6 +23,7 @@ var onMapSuccess = function (position) {
     Latitude = position.coords.latitude;
     Longitude = position.coords.longitude;
     getMap(Latitude, Longitude);
+    onMapWatchSuccess(position);
 }
 // Setting map,geocode directions & display directions
 function getMap(latitude, longitude) {
@@ -87,9 +86,11 @@ function getMap(latitude, longitude) {
     directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setMap(map);
     directionsDisplay.setPanel(document.getElementById('right-panel'));
-
     console.log("directions set");
+
+
 }
+
 
 // Success callback for watching your changing position
 var onMapWatchSuccess = function (position) {
