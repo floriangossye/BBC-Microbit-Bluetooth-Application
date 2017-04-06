@@ -13,11 +13,10 @@ var destination;
 // Get geo coordinates & call location
 function getMapLocation() {
     navigator.geolocation.getCurrentPosition(onMapSuccess, onMapError, {
-        enableHighAccuracy: true //Highest Gps accuracy
+        enableHighAccuracy: false //Highest Gps accuracy
     });
     console.log("Initialising map");
 }
-
 // Success callback for get geo coordinates
 var onMapSuccess = function (position) {
     Latitude = position.coords.latitude;
