@@ -27,16 +27,15 @@ var onMapSuccess = function (position) {
     Longitude = position.coords.longitude;
     getMap(Latitude, Longitude);
     //onMapWatchSuccess(position);
-    trackUser();
+    autoUpdate();
     geocodeAddress();
     createDirections();
 }
-//Update User Marker
-function trackUser() {
+//Update userTracker
+function autoUpdate() {
     navigator.geolocation.getCurrentPosition(function (position) {
         var newPoint = new google.maps.LatLng(position.coords.latitude,
             position.coords.longitude);
-
         if (markerA) {
             // Marker already created - Move it
             markerA.setPosition(newPoint);
@@ -47,10 +46,11 @@ function trackUser() {
                 map: map
             });
         }
+        // Center the map on the new position
         map.setCenter(newPoint);
     });
-    // call location every millisecond
-    setTimeout(trackUser, 100);
+    // Call the autoUpdate() millisecond
+    setTimeout(autoUpdate, 100);
 }
 // Setting map,geocode directions & display directions
 function getMap(latitude, longitude) {
@@ -65,7 +65,7 @@ function getMap(latitude, longitude) {
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
     console.log("Map is set");
 }
-//Turns string to coords
+//Geocode Adress
 function geocodeAddress() {
     address = document.getElementById("address").value;
     console.log("Initialise geocoding");
@@ -87,7 +87,6 @@ function createDirections() {
     var request = {
         origin: latLong,
         destination: destination,
-        unitSystem: google.maps.UnitSystem.METRIC,
         travelMode: 'BICYCLING'
     };
     directionsService.route(request, function (result, status) {
@@ -113,9 +112,7 @@ var onMapWatchSuccess = function (position) {
 
         Latitude = updatedLatitude;
         Longitude = updatedLongitude;
-
         getMap(updatedLatitude, updatedLongitude);
-
     }
 }
 // Error callback
