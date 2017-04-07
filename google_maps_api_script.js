@@ -4,11 +4,8 @@ var Longitude = undefined;
 var mapOptions;
 var request;
 var map;
-var changingPos;
-var chLatLong;
 var markerA
 var latlong;
-var latlong2;
 var address;
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
@@ -55,7 +52,6 @@ function autoUpdate() {
 // Setting map,geocode directions & display directions
 function getMap(latitude, longitude) {
     latLong = new google.maps.LatLng(latitude, longitude);
-    //latLong2 = new google.maps.LatLng(latitude + 0.003, longitude);
     mapOptions = {
         center: latLong,
         zoom: 15,
