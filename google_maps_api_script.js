@@ -88,7 +88,11 @@ function createDirections() {
     directionsService.route(request, function (result, status) {
         if (status == 'OK') {
             directionsDisplay.setDirections(result);
-            console.log(result);
+            var str = JSON.stringify(result);
+
+            console.log(JSON.stringify(result, null, "    "));
+            //console.log(result);
+
         }
     });
     directionsDisplay = new google.maps.DirectionsRenderer({
