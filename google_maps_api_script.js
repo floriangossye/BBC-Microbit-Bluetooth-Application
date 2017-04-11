@@ -105,7 +105,6 @@ var onMapWatchSuccess = function (position) {
     var updatedLongitude = position.coords.longitude;
 
     if (updatedLatitude != Latitude && updatedLongitude != Longitude) {
-
         Latitude = updatedLatitude;
         Longitude = updatedLongitude;
         getMap(updatedLatitude, updatedLongitude);
