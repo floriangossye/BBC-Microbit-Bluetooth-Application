@@ -1,16 +1,22 @@
 /*Created by Florian Gossye for FabLab Factory*/
-var Latitude = undefined;
-var Longitude = undefined;
+var Latitude;
+var Longitude;
 var mapOptions;
 var request;
 var map;
+var newPoint;
 var markerA
 var latlong;
 var address;
+var directionsJSON;
+var jsonResult;
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 var geocoder = new google.maps.Geocoder();
 var destination;
+
+window.onload = getMap, autoUpdate();
+
 // Get geo coordinates & call location
 function getMapLocation() {
     navigator.geolocation.getCurrentPosition(onMapSuccess, onMapError, {
@@ -23,15 +29,16 @@ var onMapSuccess = function (position) {
     Latitude = position.coords.latitude;
     Longitude = position.coords.longitude;
     getMap(Latitude, Longitude);
-    //onMapWatchSuccess(position);
     autoUpdate();
     geocodeAddress();
     createDirections();
 }
+
+
 //Update userTracker
 function autoUpdate() {
     navigator.geolocation.getCurrentPosition(function (position) {
-        var newPoint = new google.maps.LatLng(position.coords.latitude,
+        newPoint = new google.maps.LatLng(position.coords.latitude,
             position.coords.longitude);
         if (markerA) {
             // Marker already created - Move it
@@ -49,12 +56,13 @@ function autoUpdate() {
     // Call the autoUpdate() millisecond
     setTimeout(autoUpdate, 100);
 }
+
 // Setting map,geocode directions & display directions
 function getMap(latitude, longitude) {
     latLong = new google.maps.LatLng(latitude, longitude);
     mapOptions = {
         center: latLong,
-        zoom: 15,
+        zoom: 20,
         mapTypeId: google.maps.MapTypeId.TERRAIN
     };
     //Map Object & Directions Object
@@ -81,39 +89,41 @@ function geocodeAddress() {
 function createDirections() {
     console.log("requesting directions");
     var request = {
-        origin: latLong,
+        origin: newPoint,
         destination: destination,
         travelMode: 'BICYCLING'
     };
     directionsService.route(request, function (result, status) {
         if (status == 'OK') {
             directionsDisplay.setDirections(result);
-            var str = JSON.stringify(result);
-
-            console.log(JSON.stringify(result, null, "    "));
-            //console.log(result);
-
+            jsonResult = JSON.stringify(result, null, "    ");
+            console.log(jsonResult);
         }
     });
     directionsDisplay = new google.maps.DirectionsRenderer({
-        suppressMarkers: true
+        draggable: true
+        
+
     });
     directionsDisplay.setMap(map);
     directionsDisplay.setPanel(document.getElementById('right-panel'));
+    autoUpdate();
     console.log("directions set");
 }
+
 // Success callback for watching your changing position
-var onMapWatchSuccess = function (position) {
+var onMapWatchSuccess =
+    function (position) {
 
-    var updatedLatitude = position.coords.latitude;
-    var updatedLongitude = position.coords.longitude;
+        var updatedLatitude = position.coords.latitude;
+        var updatedLongitude = position.coords.longitude;
 
-    if (updatedLatitude != Latitude && updatedLongitude != Longitude) {
-        Latitude = updatedLatitude;
-        Longitude = updatedLongitude;
-        getMap(updatedLatitude, updatedLongitude);
+        if (updatedLatitude != Latitude && updatedLongitude != Longitude) {
+            Latitude = updatedLatitude;
+            Longitude = updatedLongitude;
+            getMap(updatedLatitude, updatedLongitude);
+        }
     }
-}
 // Error callback
 function onMapError(error) {
     console.log('code: ' + error.code + '\n' +

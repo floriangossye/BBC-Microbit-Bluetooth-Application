@@ -15,7 +15,6 @@
         if (window.hyper && window.hyper.log) {
             console.log = hyper.log
         }
-
     </script>
     <script src="cordova.js"></script>
     <script src="libs/evothings/evothings.js"></script>
@@ -57,20 +56,10 @@
     <p>
         <button onclick="app.printUp()" class="charcoal">Print Up</button>
     </p>
-    <!--<p>
-        <button onclick="app.printLocation()" class="charcoal">Print Location</button>
-    </p>
     <p>
-        <button onclick="app.getLocation()" class="charcoal">Get Location</button>
-    </p>
-    <p id="geolocation"></p>
--->
-    <p>
-        <button onclick="getMapLocation()" class="charcoal">Get Map</button>
+        <button onclick="getMapLocation()" class="charcoal" id="btnMap">Calculate Directions</button>
     </p>
     <input id="address" type="textbox" value="Enter location">
-    <input id="submit" type="button" value="Measure route">
-
     <div id="map"></div>
     <div id="right-panel"></div>
 </body>
