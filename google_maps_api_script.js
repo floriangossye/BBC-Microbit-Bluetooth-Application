@@ -16,25 +16,20 @@ var geocoder = new google.maps.Geocoder();
 var destination;
 
 window.onload = getMap, autoUpdate();
-
+console.log("Initialising map");
 // Get geo coordinates & call location
 function getMapLocation() {
     navigator.geolocation.getCurrentPosition(onMapSuccess, onMapError, {
         enableHighAccuracy: true //Highest Gps accuracy
     });
-    console.log("Initialising map");
 }
 // Success callback for get geo coordinates
 var onMapSuccess = function (position) {
     Latitude = position.coords.latitude;
     Longitude = position.coords.longitude;
-    getMap(Latitude, Longitude);
-    autoUpdate();
     geocodeAddress();
     createDirections();
 }
-
-
 //Update userTracker
 function autoUpdate() {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -56,12 +51,11 @@ function autoUpdate() {
     // Call the autoUpdate() millisecond
     setTimeout(autoUpdate, 100);
 }
-
 // Setting map,geocode directions & display directions
 function getMap(latitude, longitude) {
     latLong = new google.maps.LatLng(latitude, longitude);
     mapOptions = {
-        center: latLong,
+        center: newPoint,
         zoom: 20,
         mapTypeId: google.maps.MapTypeId.TERRAIN
     };
@@ -97,20 +91,21 @@ function createDirections() {
         if (status == 'OK') {
             directionsDisplay.setDirections(result);
             jsonResult = JSON.stringify(result, null, "    ");
-            console.log(jsonResult);
+            //console.log(jsonResult);
         }
     });
     directionsDisplay = new google.maps.DirectionsRenderer({
-        draggable: true
-        
-
+        draggable: true,
+        preserveViewport:true,
+        markerOptions:{
+            visible:true
+        }
     });
     directionsDisplay.setMap(map);
-    directionsDisplay.setPanel(document.getElementById('right-panel'));
-    autoUpdate();
+    //directionsDisplay.setPanel(document.getElementById('right-panel'));
+    //autoUpdate();
     console.log("directions set");
 }
-
 // Success callback for watching your changing position
 var onMapWatchSuccess =
     function (position) {
@@ -128,10 +123,4 @@ var onMapWatchSuccess =
 function onMapError(error) {
     console.log('code: ' + error.code + '\n' +
         'message: ' + error.message + '\n');
-}
-// Watch your changing position
-function watchMapPosition() {
-    return navigator.geolocation.watchPosition(onMapWatchSuccess, onMapError, {
-        enableHighAccuracy: true
-    });
 }
