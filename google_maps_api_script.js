@@ -5,7 +5,7 @@ var mapOptions;
 var request;
 var map;
 var newPoint;
-var markerA
+var markerA;
 var latlong;
 var address;
 var directionsJSON;
@@ -15,7 +15,10 @@ var directionsService = new google.maps.DirectionsService();
 var geocoder = new google.maps.Geocoder();
 var destination;
 
-window.onload = getMap, autoUpdate();
+window.onload = function(){
+    getMap();
+    autoUpdate();
+}
 console.log("Initialising map");
 // Get geo coordinates & call location
 function getMapLocation() {
@@ -27,10 +30,21 @@ function getMapLocation() {
 var onMapSuccess = function (position) {
     Latitude = position.coords.latitude;
     Longitude = position.coords.longitude;
-    geocodeAddress();
-    createDirections();
+    //geocodeAddress();
+    //createDirections();
 }
-//Update userTracker
+// Setting map,geocode directions & display directions
+function getMap(latitude, longitude) {
+    latLong = new google.maps.LatLng(latitude, longitude);
+    mapOptions = {
+        center: newPoint,
+        zoom: 20,
+        mapTypeId: google.maps.MapTypeId.TERRAIN
+    };
+    //Map Object & Directions Object
+    map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    console.log("Map is set");
+}
 function autoUpdate() {
     navigator.geolocation.getCurrentPosition(function (position) {
         newPoint = new google.maps.LatLng(position.coords.latitude,
@@ -51,18 +65,6 @@ function autoUpdate() {
     // Call the autoUpdate() millisecond
     setTimeout(autoUpdate, 100);
 }
-// Setting map,geocode directions & display directions
-function getMap(latitude, longitude) {
-    latLong = new google.maps.LatLng(latitude, longitude);
-    mapOptions = {
-        center: newPoint,
-        zoom: 20,
-        mapTypeId: google.maps.MapTypeId.TERRAIN
-    };
-    //Map Object & Directions Object
-    map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    console.log("Map is set");
-}
 //Geocode Adress
 function geocodeAddress() {
     address = document.getElementById("address").value;
@@ -75,6 +77,7 @@ function geocodeAddress() {
             var longGeo = results[0].geometry.location.lng();
             destination = new google.maps.LatLng(latGeo, longGeo);
             console.log(destination);
+            
         }
     });
     console.log("geocode finished")
@@ -91,16 +94,14 @@ function createDirections() {
         if (status == 'OK') {
             directionsDisplay.setDirections(result);
             jsonResult = JSON.stringify(result, null, "    ");
-            //console.log(jsonResult);
         }
     });
     directionsDisplay = new google.maps.DirectionsRenderer({
         draggable: true,
         preserveViewport:true,
-        markerOptions:{
-            visible:true
-        }
+        
     });
+    
     directionsDisplay.setMap(map);
     //directionsDisplay.setPanel(document.getElementById('right-panel'));
     //autoUpdate();

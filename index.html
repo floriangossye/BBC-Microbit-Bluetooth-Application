@@ -53,15 +53,19 @@
     <p>
         <button onclick="app.printRight()" class="charcoal">Go Right</button>
     </p>
+<!--
     <p>
         <button onclick="app.printUp()" class="charcoal">Print Up</button>
     </p>
+    -->
     <p>
-        <button onclick="getMapLocation()" class="charcoal" id="btnMap">Calculate Directions</button>
+        <button onclick="geocodeAddress(),
+    createDirections()" class="charcoal" id="btnMap">Calculate Directions</button>
     </p>
-    <input id="address" type="textbox" value="Enter location">
+    <input id="address" type="textbox" value="">
     <div id="map"></div>
     <div id="right-panel"></div>
+
 </body>
 
 </html>

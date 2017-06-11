@@ -7,7 +7,7 @@ var app = {};
 /**
  * Timeout (ms) after which a message is shown if the Microbit wasn't found.
  */
-app.CONNECT_TIMEOUT = 3000;
+app.CONNECT_TIMEOUT = 10000;
 
 /**
  * Object that holds Microbit UUIDs.
